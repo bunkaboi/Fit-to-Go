@@ -14,7 +14,70 @@
 
     <div w3-include-html="templates/header.html"></div>
 
-    <div id="XXX"></div>
+    <div id="bannerSection" class="bannerSection">
+        <img src="./img/banner.jpg" alt="">
+    </div>
+    <div id="board" class="board">
+        
+        <div class="infoSection">
+            <div class="info">
+                <h1>FitFood delivered</h1>
+                <div>
+                    <img src="" alt="sterne">
+                    &nbsp;580 Bewertungen
+                </div>
+                <div class="conditions">
+                    Mindestbestellwert: 15,- € | Lieferung: 4,- € | ab 30,- € keine Lieferkosten
+                </div>    
+            </div>
+            <div class="callAction">
+                <img src="" alt="telSymbol">
+                0123 / 4567890
+            </div>
+        </div>
+
+        <div class="mainContainer">
+            <div id="menuList" class="menuList">
+                <h2>H2 menuList</h2>
+                <div id="menuCard${i}" class="menuCard">
+                    <div class="menuDetails">
+                        <h3>H3 menuDetails</h3>
+                        <span>SPAN menuDetails</span>
+                        <p>P menuDetails</p>
+                        <h4>H4 menuDetails</h4>
+                    </div>
+                    <div class="putInCart">
+                        <div class="addButton"></div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="cartContainer">
+                <h2>H2 orderCart</h2>
+                <div class="optionDelivery">
+                    <div>liefern</div>
+                    <div>abholen</div>
+                </div>
+                <div class="orderedContainer">
+                    <div id="orderedItem${i}" class="orderedItem">
+                        <div class="posMenu">
+                            <div>PosNr</div>
+                            <div>MenuAuswahl</div>
+                        </div>
+                        <div>Preis</div>
+                    </div>
+                    <div class="addCount">
+                        <div class="reduce">red</div>
+                        <div class="number">Zahl</div>
+                        <div class="add">add</div>
+                    </div>
+                </div>
+                <div class="orderedContainer"></div>
+            </div>
+        </div>
+
+    </div>
     
     <div w3-include-html="templates/footer.html"></div>
     
