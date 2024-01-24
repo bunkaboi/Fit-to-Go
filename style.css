@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    background-color: rgba(160, 130, 90, 0.5);
+    background-color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -13,11 +13,10 @@ body{
 
 .header{
     height: 80px;
-    background-color: rgb(80, 60, 50);
+    background-color: rgb(60, 120, 140);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     border-radius: 16px 0px 0px 16px;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.7));
     margin-top: 16px;
@@ -44,11 +43,10 @@ body{
 
 .footer{
     height: 80px;
-    background-color: rgb(80, 60, 50);
+    background-color: rgb(60, 120, 140);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     border-radius: 16px 0px 0px 16px;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.7));
     margin-top: 16px;
@@ -102,22 +100,12 @@ h1, h2, h3, h4, h5, h6, span, p {
     display: flex;
     justify-content: center;
     z-index: 20;
-    background-color: rgba(160, 130, 90, 0.5);
+    background-color: rgba(120, 120, 120, 0.3);
     border-radius: 16px 0px 0px 16px;
     border: 1px solid rgb(80, 60, 50);
-    width: 100%;
+    border-right: none;
     margin-top: 16px;
-    margin-bottom: 16px;
-    margin-left: 2%;
-}
-
-.infoContainer {
-    background-color: rgba(160, 130, 90, 0.5);
-    border-radius: 16px 0px 0px 16px;
-    border: 1px solid rgb(80, 60, 50);
-    width: 100%;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
     margin-left: 2%;
 }
 
@@ -131,50 +119,114 @@ h1, h2, h3, h4, h5, h6, span, p {
 
 .menuList {
     width: 70%;
-    height: 100em;
-    background-color: aqua;
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 .menuCard {
     width: 98%;
     height: 120px;
-    background-color: beige;
+    background-color: rgba(60, 120, 140, 0.2);
     border: 1px solid rgb(80, 60, 50);
-    margin-bottom: 8px;
+    margin-bottom: 48px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    
 }
 
 .menuDetails {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     height: 100px;
+}
+
+.menuDescription {
+    display: flex;
+    flex-direction: column;
     margin: 8px;
 }
 
-.addButton {
-    width: 32px;
-    height: 32px;
-    background-color: rgb(80, 60, 50);
+.menuCard img {
+    width: 140px;
+    height: 140px;
+    border: 5px solid rgb(200, 120, 10);
     border-radius: 50%;
-    margin: 8px;
+}
+
+.numberInput {
+    display: flex;
+    flex-direction: column;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
+}
+
+.putInCart {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-right: 16px;
+}
+
+.numberAdd {
+    width: 24px;
+    height: 24px;
+    background-color: rgb(200, 120, 10);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25% 25% 0 0;
+    cursor: pointer;
+}
+
+.currentNumber {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.numberReduce {
+    width: 24px;
+    height: 24px;
+    background-color: rgb(200, 120, 10);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 25% 25%;
+    cursor: pointer;
+}
+
+.submitBtn {
+    width: 24px;
+    height: 24px;
+    background-color: aqua;
+    cursor: pointer;
 }
 
 .cartContainer {
     width: 30%;
     height: 400px;
-    background-color: rgb(88, 78, 177);
-    position: fixed;
-    right:0;
+    background-color: rgba(60, 120, 140, 0.2);
+    border: 1px solid rgb(80, 60, 50);
+    border-right: none;
+    border-radius: 16px 0px 0px 16px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    position: sticky;
+    top: 80px; 
+    
 }
 
 .optionDelivery {
