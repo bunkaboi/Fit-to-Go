@@ -26,81 +26,158 @@ function includeHTML() {
     }
 }
 
-let menuName = ['High-Protein Pizza', 'ChickenBurger in ProteinBun', 'Cesar Salad mit Protein-Dressing', 'Platzhalter 1', 'Platzhalter 2', 'Platzhalter 3'];
+let menuName = ['HighProtein Pizza', 'ChickenBurger in ProteinBun', 'Cesar Salad mit Protein-Dressing', 'Platzhalter 1', 'Platzhalter 2', 'Platzhalter 3'];
 let menuImg = ['./img/pizza.jpg', '','','','',''];
-let menuPrice = [11.70, 10.80, 9.50, 11, 12, 13];
-let menuAmount = [1, 2, 1, 3, 2, 1];
+let singlePrice = [11.70, 10.80, 9.50, 11, 12, 13];
 let cartName = [];
 let cartPrice = [];
 let cartAmount = [];
 
+//Summenbildung mit mindestbestellwert lieferung/abholung...paar Gerichte, Optik, fertig
+//lieferung button muss bleiben wenn man reduziert oder added
 function render() {
     includeHTML();
-
-    let menuList = document.getElementById('menuList');
-
-    menuList.innerHTML = ``;
-
-    for (let i = 0; i < menuName.length; i++) {
-        const name = menuName[i];
-        const price = menuPrice[i];
-        const image = menuImg[i];
-        const amount = menuAmount[i];
-
-        menuList.innerHTML += /*HTML*/ generateMenuListHTML(name, price, image, amount, i);
-    }
-
-    let shoppingCart = document.getElementById('shoppingCart');
-
-
+    generateMenuList();
+    generateCartMenu();
+    
 }
 
-function generateMenuListHTML(name, price, image, amount, i) {
+function generateMenuList() {
+    let menuList = document.getElementById('menuList');
+    menuList.innerHTML = ``;
+    for (let i = 0; i < menuName.length; i++) {
+        const name = menuName[i];
+        const price = singlePrice[i];
+        const image = menuImg[i];
+        menuList.innerHTML += /*HTML*/ generateMenuListHTML(name, price, image, i);
+    }
+}
+
+function generateMenuListHTML(name, price, image, i) {
     return `
     <div id="menuCard${i}" class="menuCard">
         <div class="menuDetails">
             <img src="${image}" alt="">
             <div class="menuDescription">
                 <h3>${name}</h3>
-                <h4>${price}</h4>
+                <h4>${price.toFixed(2)} EUR</h4>
             </div>
         </div>
         <div class="putInCart">
-            <div class="numberInput">
-                <div class="numberAdd" onclick="menuCountAdd(${i})">+</div>
-                <div id="currentCount" class="currentNumber">${amount}</div>
-                <div class="numberReduce" onclick="menuCountReduce(${i})">-</div>
-            </div>
-            <div class="submitBtn"></div>
+            <div class="addMenuBtn" onclick="addMenu('${name}', ${price})">+</div>
         </div>
     </div> 
-`;
+    `;
 }
 
-function generateShoppingCartHTML (name, price, image, amount, i) {
-
+function generateCartMenu() {
+    let shoppingCartContainer = document.getElementById('shoppingCartContainerJS');
+    shoppingCartContainer.innerHTML = ``;
+    if (cartName.length <= 0) {
+        shoppingCartContainer.innerHTML = generateEmptyCartHTML ();
+        document.getElementById('deliveryOption').style.display="none";
+    } else {
+        for (let j = 0; j < cartName.length; j++) {
+            const CName = cartName[j];
+            const CPrice = cartPrice[j];
+            const CAmount = cartAmount[j];
+            const posNr= +[j]+1;
+            shoppingCartContainer.innerHTML += /*HTML*/ generateCartMenuHTML(CName, CPrice, CAmount, posNr, j);
+        }
+        deliveryOption();
+    }
 }
 
-function addMenu(name, price, image, amount, i) {
-    
+function deliveryOption() {
+    let deliveryOption = document.getElementById('deliveryOption');
+    deliveryOption.style.display="flex";
+    deliveryOption.innerHTML = /*HTML*/`
+        <div class="deliveryOptionBtn">
+            <div id="deliveryBtn" class="deliveryBtn" onclick="activateDelivery()">Lieferung</div>
+            <div id="pickupBtn" class="pickupBtn" onclick="activatePickup()">Abholung</div>
+        </div>
+    `;
 }
 
-function menuCountAdd(i) {
-    let Amount = menuAmount[i];
-    let newAmount = Amount +1;
+function activateDelivery() {
+    document.getElementById('deliveryBtn').classList.add('active')
+    document.getElementById('pickupBtn').classList.remove('active')
+}
 
-    menuAmount.splice(i, 1, newAmount);
+function activatePickup() {
+    document.getElementById('pickupBtn').classList.add('active')
+    document.getElementById('deliveryBtn').classList.remove('active')
+}
+
+function generateEmptyCartHTML () {
+    return `
+    <div>deine Bestellung bitte</div>`;
+}
+
+function generateCartMenuHTML(CName, CPrice, CAmount, posNr, j) {
+    return `
+    <div class="cartMenuContainer">
+        <div id="cartMenu${j}" class="cartMenu">
+            <div class="posMenu">
+                <div>${posNr}</div>.&nbsp;&nbsp;
+                <div><b>${CName}</b></div>
+            </div>
+            <div>${CPrice.toFixed(2)} EUR</div>
+        </div>
+        <div class="addCount">
+            <div class="reduce" onclick="cartCountReduce(${j})">-</div>
+            <div class="number">${CAmount}</div>
+            <div class="add" onclick="cartCountAdd(${j})">+</div>
+        </div>
+    </div>
+    `;
+}
+
+function addMenu(name, price) {
+    let index = cartName.indexOf(name);
+    if (index == -1) {
+    cartName.push(name);
+    cartPrice.push(price);
+    cartAmount.push(1);
+    } else {
+        cartCountAdd(index);
+    }
     render();
 }
 
-function menuCountReduce(i) {
-    let Amount = menuAmount[i];
+function cartCountAdd(j) {
+    let index = menuName.indexOf(cartName[j])
+    let Amount = cartAmount[j];
+    let newAmount = Amount +1;
+    let Price = singlePrice[index];
+    
+    let newPrice = newAmount * Price;
+    cartPrice.splice(j, 1, newPrice);
+    cartAmount.splice(j, 1, newAmount);
+    
+    render();
+}
+
+function cartCountReduce(j) {
+    let index = menuName.indexOf(cartName[j])
+    let Amount = cartAmount[j];
     let newAmount = Amount -1;
+    let Price = singlePrice[index];
+
+    let newPrice = newAmount * Price;
 
     if (newAmount >= 1) {
-        menuAmount.splice(i, 1, newAmount);
+        cartPrice.splice(j, 1, newPrice);
+        cartAmount.splice(j, 1, newAmount);
         render();
         } else {
-            return;
+            deleteCartMenu(j);
         }
+}
+
+function deleteCartMenu(j) {
+    cartName.splice(j, 1);
+    cartPrice.splice(j, 1);
+    cartAmount.splice(j, 1);
+    render();
 }

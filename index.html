@@ -13,11 +13,11 @@
 <body onload ="render()">
 
 <div id="mainContainer" class="mainContainer">
-    <div w3-include-html="templates/header.html"></div>
+    <section w3-include-html="templates/header.html"></section>
 
-    <div id="bannerSection" class="bannerSection">
+    <section id="banner" class="flex">
         <img src="./img/banner.jpg" alt="">
-    </div>
+    </section>
     
         
         <section class="infoSection">
@@ -33,35 +33,22 @@
             </div>            
         </section>
 
-        <div class="orderContainer">
+        <div class="flex">
             <div id="menuList" class="menuList">
                 <!-- wird gerendert -->
             </div>
             
-            <div id="shoppingCart" class="cartContainer">
-                <h2>H2 orderCart</h2>
-                <div class="optionDelivery">
-                    <div>liefern</div>
-                    <div>abholen</div>
+            <div id="shoppingCartContainer" class="cartContainer">
+                <div class="scHeader">
+                    <h2>Warenkorb</h2>
                 </div>
-                <div class="orderedContainer">
-                    <div id="orderedItem${i}" class="orderedItem">
-                        <div class="posMenu">
-                            <div>PosNr</div>
-                            <div>MenuAuswahl</div>
-                        </div>
-                        <div>Preis</div>
-                    </div>
-                    <div class="addCount">
-                        <div class="reduce">red</div>
-                        <div class="number">Zahl</div>
-                        <div class="add">add</div>
-                    </div>
-                </div>
-                <div class="orderedContainer"></div>
+                <div id="shoppingCartContainerJS"></div>
+                <div id="deliveryOption" class="deliveryOptionContainer"></div>                
+                <div id="checkoutContainer" class="checkoutContainer"></div>
             </div>
         </div>
 
+        
     
     
     <div w3-include-html="templates/footer.html"></div>

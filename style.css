@@ -75,11 +75,11 @@ body{
 }
 
 
-.bannerSection {
+.flex {
     display: flex;
 }
 
-.bannerSection img {
+#banner img {
     height: 250px;
     width: 100%;
     object-fit: cover;
@@ -92,14 +92,9 @@ h1, h2, h3, h4, h5, h6, span, p {
     margin: 0;
 }
 
-.orderContainer {
-    display: flex;
-}
-
 .infoSection {
     display: flex;
     justify-content: center;
-    z-index: 20;
     background-color: rgba(120, 120, 120, 0.3);
     border-radius: 16px 0px 0px 16px;
     border: 1px solid rgb(80, 60, 50);
@@ -168,53 +163,28 @@ h1, h2, h3, h4, h5, h6, span, p {
 .putInCart {
     display: flex;
     align-items: center;
-    gap: 16px;
     margin-right: 16px;
 }
 
-.numberAdd {
-    width: 24px;
-    height: 24px;
+.addMenuBtn {
+    width: 32px;
+    height: 32px;
     background-color: rgb(200, 120, 10);
-    color: white;
+    cursor: pointer;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 25% 25% 0 0;
-    cursor: pointer;
-}
-
-.currentNumber {
-    width: 24px;
-    height: 24px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.numberReduce {
-    width: 24px;
-    height: 24px;
-    background-color: rgb(200, 120, 10);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0 0 25% 25%;
-    cursor: pointer;
-}
-
-.submitBtn {
-    width: 24px;
-    height: 24px;
-    background-color: aqua;
-    cursor: pointer;
+    font-size: 32px;
+    color: white;    
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
 }
 
 .cartContainer {
     width: 30%;
-    height: 400px;
+    min-height: 400px;
+    height: fit-content;
     background-color: rgba(60, 120, 140, 0.2);
     border: 1px solid rgb(80, 60, 50);
     border-right: none;
@@ -229,22 +199,24 @@ h1, h2, h3, h4, h5, h6, span, p {
     
 }
 
-.optionDelivery {
-    display: flex;
-    gap: 8px;
-}
-
-.orderedContainer {
-    display: flex;
-    flex-direction: column;
+#shoppingCartContainerJS {
     width: 100%;
 }
 
-.orderedItem {
+.cartMenuContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    padding-bottom: 8px;
+}
+
+.cartMenu {
     display: flex;
     justify-content: space-between;
     margin-left: 16px;
     margin-right: 16px;
+    margin-top: 8px;
 }
 
 .posMenu {
@@ -254,7 +226,107 @@ h1, h2, h3, h4, h5, h6, span, p {
 .addCount {
     display: flex;
     justify-content: flex-end;
-    margin-left: 16px;
+    margin-top: 8px;
     margin-right: 16px;
-    gap: 8px;
+}
+
+.add {
+    width: 24px;
+    height: 24px;
+    background-color: rgb(200, 120, 10);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    padding: 0 4px;
+}
+
+.number {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    
+}
+
+.reduce {
+    width: 24px;
+    height: 24px;
+    background-color: rgb(200, 120, 10);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    padding: 0 4px;
+}
+
+.scHeader {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 16px 0 0 0;
+    height: 48px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.deliveryOptionContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.deliveryOptionBtn {
+    display: flex;
+    background-color: grey;
+    border-radius: 8px;
+    margin: 16px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+
+}
+
+.deliveryBtn {
+    background-color: grey;
+    border-radius: 8px 0 0 8px;
+    color: lightgray;
+    padding: 4px;
+}
+
+.pickupBtn {
+    background-color: grey;
+    border-radius: 0 8px 8px 0;
+    color: lightgray;
+    padding: 4px;
+}
+
+.active {
+    background-color: rgb(200, 120, 10);
+    
+    color: white;
+    padding: 4px;
+}
+
+.checkoutContainer {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 0 16px;
+    min-height: 48px;
+    height:fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
 }
