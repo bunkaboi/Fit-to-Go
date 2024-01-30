@@ -26,20 +26,20 @@ function includeHTML() {
     }
 }
 
-let menuName = ['HighProtein Pizza', 'ChickenBurger in ProteinBun', 'Cesar Salad mit Protein-Dressing', 'Platzhalter 1', 'Platzhalter 2', 'Platzhalter 3'];
-let menuImg = ['./img/pizza.jpg', '','','','',''];
-let singlePrice = [11.70, 10.80, 9.50, 11, 12, 13];
+let menuName = ['HighProtein Pizza', 'ChickenBurger in ProteinBun', 'Cesar Salad', 'Hähnchenfilet mit Couscous', 'Hähnchen Curry Gyros', 'Buffalo Chicken Salad'];
+let menuImg = ['./img/pizza.jpg', './img/chickenburger.jpg','./img/cesarsalad.webp','./img/hahncouscous.avif','./img/hahncurry.jpg','./img/buffalochicken.jpg'];
+let singlePrice = [11.70, 10.80, 9.50, 11.20, 10.60, 9.70];
 let cartName = [];
 let cartPrice = [];
 let cartAmount = [];
 
-//Summenbildung mit mindestbestellwert lieferung/abholung...paar Gerichte, Optik, fertig
-//lieferung button muss bleiben wenn man reduziert oder added
+//paar Gerichte, Optik, fertig
+//responsive Design
+
 function render() {
     includeHTML();
     generateMenuList();
-    generateCartMenu();
-    
+    generateCartContainer(); 
 }
 
 function generateMenuList() {
@@ -49,7 +49,8 @@ function generateMenuList() {
         const name = menuName[i];
         const price = singlePrice[i];
         const image = menuImg[i];
-        menuList.innerHTML += /*HTML*/ generateMenuListHTML(name, price, image, i);
+        menuList.innerHTML += /*HTML*/ 
+        generateMenuListHTML(name, price, image, i);
     }
 }
 
@@ -70,51 +71,52 @@ function generateMenuListHTML(name, price, image, i) {
     `;
 }
 
-function generateCartMenu() {
+function generateCartContainer() {
     let shoppingCartContainer = document.getElementById('shoppingCartContainerJS');
     shoppingCartContainer.innerHTML = ``;
-    if (cartName.length <= 0) {
-        shoppingCartContainer.innerHTML = generateEmptyCartHTML ();
-        document.getElementById('deliveryOption').style.display="none";
-    } else {
-        for (let j = 0; j < cartName.length; j++) {
-            const CName = cartName[j];
-            const CPrice = cartPrice[j];
-            const CAmount = cartAmount[j];
-            const posNr= +[j]+1;
-            shoppingCartContainer.innerHTML += /*HTML*/ generateCartMenuHTML(CName, CPrice, CAmount, posNr, j);
+        if (cartName.length <= 0) {
+            shoppingCartContainer.innerHTML = generateEmptyCartHTML ();
+            document.getElementById('deliveryOption').style.display="none";
+        } else {
+            for (let j = 0; j < cartName.length; j++) {
+                const CName = cartName[j];
+                const CPrice = cartPrice[j];
+                const CAmount = cartAmount[j];
+                const posNr= +[j]+1;
+                shoppingCartContainer.innerHTML += /*HTML*/ 
+                generateCartContainerHTML(CName, CPrice, CAmount, posNr, j);
+            }
+            deliveryOption();
+            ifToLessToBring();
         }
-        deliveryOption();
-    }
 }
 
-function deliveryOption() {
-    let deliveryOption = document.getElementById('deliveryOption');
-    deliveryOption.style.display="flex";
-    deliveryOption.innerHTML = /*HTML*/`
-        <div class="deliveryOptionBtn">
-            <div id="deliveryBtn" class="deliveryBtn" onclick="activateDelivery()">Lieferung</div>
-            <div id="pickupBtn" class="pickupBtn" onclick="activatePickup()">Abholung</div>
-        </div>
-    `;
+function generateConfirmation() {
+    let shoppingCartContainer = document.getElementById('shoppingCartContainerJS');
+    shoppingCartContainer.innerHTML = ``;
+    shoppingCartContainer.innerHTML += /*HTML*/ 
+        generateConfirmationHTML();
+    document.getElementById('deliveryOption').style.display="none";
+    document.getElementById('checkoutContainer').innerHTML = ``;
 }
 
-function activateDelivery() {
-    document.getElementById('deliveryBtn').classList.add('active')
-    document.getElementById('pickupBtn').classList.remove('active')
-}
-
-function activatePickup() {
-    document.getElementById('pickupBtn').classList.add('active')
-    document.getElementById('deliveryBtn').classList.remove('active')
-}
-
-function generateEmptyCartHTML () {
+function generateConfirmationHTML() {
     return `
-    <div>deine Bestellung bitte</div>`;
+    <div class="emptyCart">
+            <h2>Vielen Dank für deine Bestellung</h2>
+            <div class="orderNowBtn active" onclick="deleteEntireCartMenu()">OK!</div>
+        </div>`;
 }
 
-function generateCartMenuHTML(CName, CPrice, CAmount, posNr, j) {
+function generateEmptyCartHTML() {
+    return `
+    <div class="emptyCart">
+            <h2>Fülle deinen Warenkorb</h2>
+            <div>Füge einige leckere Gerichte aus der Speisenkarte hinzu und bestelle dein Essen.</div>
+        </div>`;
+}
+
+function generateCartContainerHTML(CName, CPrice, CAmount, posNr, j) {
     return `
     <div class="cartMenuContainer">
         <div id="cartMenu${j}" class="cartMenu">
@@ -133,12 +135,95 @@ function generateCartMenuHTML(CName, CPrice, CAmount, posNr, j) {
     `;
 }
 
+function subTotal() {
+    let sum = 0;
+    for (let i = 0; i < cartPrice.length; i++) {
+        sum += cartPrice[i];        
+    }
+    return sum;
+}
+
+function ifToLessToBring() {
+    let sum = subTotal();
+    if (sum < 15) {
+        activatePickup();
+    } 
+}
+
+function deliveryOption() {
+    let deliveryOption = document.getElementById('deliveryOption');
+    deliveryOption.style.display="flex";
+    deliveryOption.innerHTML = /*HTML*/`
+        <div class="delCont">
+            <div class="deliveryOptionBtn">
+                <div id="deliveryBtn" class="deliveryBtn" onclick=${allowDelivery()}>Lieferung</div>
+                <div id="pickupBtn" class="pickupBtn" onclick="activatePickup()">Abholung</div>
+            </div>
+            <div id="disclaimer" class="disclaimer displayNone">Bitte wähle eine Lieferoption!</div>
+        </div>
+        <div id="sumContainer" class="sumContainer"></div>
+    `;
+    totalSum();
+}
+
+function allowDelivery() {
+    if (subTotal() > 14.99) {
+        return "activateDelivery()";
+    } 
+}
+
+function totalSum() {
+    let deliverySum = document.getElementById('sumContainer');
+    let delCosts = deliveryCosts();
+    let total = subTotal() + delCosts
+    deliverySum.innerHTML = /*HTML*/`
+        <div id="deliveryCosts">Lieferkosten: ${delCosts.toFixed(2)} EUR</div>
+        <div id="totalCosts"><b>Endsumme: ${total.toFixed(2)} EUR</b></div>
+    `;
+    orderNowBtnActive();
+}
+
+function orderNowBtnActive() {
+    if (document.getElementById('pickupBtn').classList.contains('active') == true || document.getElementById('deliveryBtn').classList.contains('active') == true) {
+        document.getElementById('checkoutContainer').innerHTML = `<div id="orderNowBtn" class="orderNowBtn" onclick="generateConfirmation()">jetzt bestellen!</div>`; 
+        document.getElementById('disclaimer').classList.add('displayNone');
+        document.getElementById('orderNowBtn').classList.add('active');           
+    } 
+    if (document.getElementById('pickupBtn').classList.contains('active') == false && document.getElementById('deliveryBtn').classList.contains('active') == false) {
+        document.getElementById('checkoutContainer').innerHTML = `<div id="orderNowBtn" class="orderNowBtn">jetzt bestellen!</div>`;
+        document.getElementById('disclaimer').classList.remove('displayNone');
+        document.getElementById('orderNowBtn').classList.remove('active');
+    } 
+}
+
+function deliveryCosts() {
+    let delCosts = 0;
+    if (subTotal() < 29.99 && subTotal() > 14.99) {
+        delCosts = 4
+    } if (document.getElementById('pickupBtn').classList.contains('active') == true) {
+        delCosts = 0
+    } 
+    return delCosts;
+}
+
+function activateDelivery() {
+    document.getElementById('deliveryBtn').classList.add('active');
+    document.getElementById('pickupBtn').classList.remove('active');
+    totalSum();
+}
+
+function activatePickup() {
+    document.getElementById('pickupBtn').classList.add('active');
+    document.getElementById('deliveryBtn').classList.remove('active');
+    totalSum();
+}
+
 function addMenu(name, price) {
     let index = cartName.indexOf(name);
     if (index == -1) {
-    cartName.push(name);
-    cartPrice.push(price);
-    cartAmount.push(1);
+        cartName.push(name);
+        cartPrice.push(price);
+        cartAmount.push(1);
     } else {
         cartCountAdd(index);
     }
@@ -150,11 +235,9 @@ function cartCountAdd(j) {
     let Amount = cartAmount[j];
     let newAmount = Amount +1;
     let Price = singlePrice[index];
-    
     let newPrice = newAmount * Price;
     cartPrice.splice(j, 1, newPrice);
     cartAmount.splice(j, 1, newAmount);
-    
     render();
 }
 
@@ -163,21 +246,27 @@ function cartCountReduce(j) {
     let Amount = cartAmount[j];
     let newAmount = Amount -1;
     let Price = singlePrice[index];
-
     let newPrice = newAmount * Price;
-
     if (newAmount >= 1) {
         cartPrice.splice(j, 1, newPrice);
         cartAmount.splice(j, 1, newAmount);
         render();
-        } else {
-            deleteCartMenu(j);
-        }
+    } else {
+        deleteCartMenu(j);
+    }
 }
 
 function deleteCartMenu(j) {
     cartName.splice(j, 1);
     cartPrice.splice(j, 1);
     cartAmount.splice(j, 1);
+    render();
+}
+
+function deleteEntireCartMenu() {
+    let length = cartName.length;
+    cartName.splice(0, length);
+    cartPrice.splice(0, length);
+    cartAmount.splice(0, length);
     render();
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fit-to-Go</title>
-    <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="icon" type="image/png" href="./img/logoleft.png">
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
 
@@ -19,37 +19,54 @@
         <img src="./img/banner.jpg" alt="">
     </section>
     
-        
-        <section class="infoSection">
-            <div class="infoTextbox">
-                <h1>FitFood delivered</h1>
-                <div>
-                    <img src="" alt="sterne">
-                    &nbsp;580 Bewertungen
-                </div>
-                <div class="conditions">
-                    Mindestbestellwert: 15,- € | Lieferung: 4,- € | ab 30,- € keine Lieferkosten
-                </div>    
-            </div>            
-        </section>
+    <section class="infoSection">
+        <div class="infoTextbox">
+            <h1>FitFood delivered</h1>
+            <div class="conditions">
+                Mindestbestellwert: 15,- € | Lieferung: 4,- € | ab 30,- € keine Lieferkosten
+            </div>    
+        </div>        
+        <!-- <a href="tel:01234567890" class="callAction">
+            <img src="./img/anruf.png" alt="telSymbol">
+            0123 / 4567890
+        </a>     -->
+    </section>
+    <!-- responsive -->
+    <div id="shoppingCartContainer" class="REScartContainer">
+        <div class="scHeader">
+            <h2>Warenkorb</h2>
+        </div>
+        <div id="shoppingCartContainerJS">
+            <!-- wird gerendert -->
+        </div>
+        <div id="deliveryOption" class="deliveryOptionContainer"></div>       
+                
+        <div id="checkoutContainer" class="checkoutContainer">
+            <div id="orderNowBtn" class="orderNowBtn" onclick="generateConfirmation()">jetzt bestellen!</div>
+        </div>
+    </div>
 
-        <div class="flex">
-            <div id="menuList" class="menuList">
-                <!-- wird gerendert -->
-            </div>
-            
-            <div id="shoppingCartContainer" class="cartContainer">
-                <div class="scHeader">
-                    <h2>Warenkorb</h2>
-                </div>
-                <div id="shoppingCartContainerJS"></div>
-                <div id="deliveryOption" class="deliveryOptionContainer"></div>                
-                <div id="checkoutContainer" class="checkoutContainer"></div>
-            </div>
+    <section class="flex">
+        <div id="menuList" class="menuList">
+            <!-- wird gerendert -->
         </div>
 
         
-    
+    <!-- full screen -->    
+        <div id="shoppingCartContainer" class="cartContainer">
+            <div class="scHeader">
+                <h2>Warenkorb</h2>
+            </div>
+            <div id="shoppingCartContainerJS">
+                <!-- wird gerendert -->
+            </div>
+            <div id="deliveryOption" class="deliveryOptionContainer"></div>       
+                    
+            <div id="checkoutContainer" class="checkoutContainer">
+                <div id="orderNowBtn" class="orderNowBtn" onclick="generateConfirmation()">jetzt bestellen!</div>
+            </div>
+        </div>
+    </section>    
     
     <div w3-include-html="templates/footer.html"></div>
 </div>    
