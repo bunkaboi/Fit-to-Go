@@ -456,6 +456,10 @@ h1, h2, h3, h4, h5, h6, span, p {
     display: none;
 }
 
+.openCart {
+    display: none;
+}
+
 @media(min-width: 799px) {
     .closeCartBtn {
         display: none;
@@ -658,6 +662,7 @@ h1, h2, h3, h4, h5, h6, span, p {
         margin-left: 3%;
         margin-right: 3%;
         margin-top: 8px;
+        display: inherit;
     }
     .openCart:hover {
         background-color: rgb(180, 105, 8);
