@@ -225,8 +225,8 @@ h1, h2, h3, h4, h5, h6, span, p {
     font-weight: lighter;
 }
 
-.REScartContainer {
-    display: none;
+.addMenuBtn:hover {
+    background-color: rgb(180, 105, 8);
 }
 
 .cartContainer {
@@ -238,7 +238,7 @@ h1, h2, h3, h4, h5, h6, span, p {
     border-right: none;
     border-radius: 16px 0px 0px 16px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
@@ -294,6 +294,10 @@ h1, h2, h3, h4, h5, h6, span, p {
     padding: 0 4px;
 }
 
+.add:hover {
+    background-color: rgb(180, 105, 8);
+}
+
 .number {
     width: 24px;
     height: 24px;
@@ -317,6 +321,10 @@ h1, h2, h3, h4, h5, h6, span, p {
     cursor: pointer;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     padding: 0 4px;
+}
+
+.reduce:hover {
+    background-color: rgb(180, 105, 8);
 }
 
 .scHeader {
@@ -347,7 +355,6 @@ h1, h2, h3, h4, h5, h6, span, p {
     margin-bottom: 4px;
     cursor: pointer;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    
 }
 
 .deliveryBtn {
@@ -357,11 +364,19 @@ h1, h2, h3, h4, h5, h6, span, p {
     padding: 4px;
 }
 
+.deliveryBtn:hover {
+    background-color: darkgrey;
+}
+
 .pickupBtn {
     background-color: grey;
     border-radius: 0 8px 8px 0;
     color: lightgray;
     padding: 4px;
+}
+
+.pickupBtn:hover {
+    background-color: darkgrey;
 }
 
 .checkoutContainer {
@@ -371,7 +386,6 @@ h1, h2, h3, h4, h5, h6, span, p {
     height:fit-content;
     width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: absolute;
@@ -406,9 +420,26 @@ h1, h2, h3, h4, h5, h6, span, p {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+.orderNowBtn:hover {
+    background-color: rgb(180, 105, 8);
+}
+
 .active {
     background-color: rgb(200, 120, 10);
     color: white;
+}
+
+.closeCartBtn {
+    background-color: rgb(200, 120, 10);
+    color: white;
+    border-radius: 8px;
+    padding: 4px 8px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.closeCartBtn:hover {
+    background-color: rgb(180, 105, 8);
 }
 
 .disclaimer {
@@ -425,7 +456,16 @@ h1, h2, h3, h4, h5, h6, span, p {
     display: none;
 }
 
-@media(max-width: 800px){
+@media(min-width: 799px) {
+    .closeCartBtn {
+        display: none;
+    }
+    .cartContainer {
+        display: flex;
+    }
+}
+
+@media(max-width: 800px) {
     .footer{
         height: 40px;
         border-radius: 16px;
@@ -469,6 +509,7 @@ h1, h2, h3, h4, h5, h6, span, p {
     .flex {
         justify-content: center;
     }
+
     #banner img {
         height: 175px;
         object-fit: cover;
@@ -515,33 +556,10 @@ h1, h2, h3, h4, h5, h6, span, p {
         display: none;
     }
 
-    .cartContainer {
-        display: none;
-    }
-
-    .REScartContainer {
-        min-height: 100px;
-        height: fit-content;
-        background-color: rgb(218, 236, 241);
-        border: 1px solid rgb(80, 60, 50);
-        border-right: none;
-        border-radius: 16px;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        margin-bottom: 16px;
-        max-width: 96%;
-        margin-left: 2%;
-        margin-right: 2%;
-        position:sticky;
-        top: 16px;
-        font-size: 12px;
-    }
     .checkoutContainer {
         position:inherit;
         border-radius: 0 0 16px 16px;
+        gap: 8px;
     }
 
     .scHeader {
@@ -616,4 +634,32 @@ h1, h2, h3, h4, h5, h6, span, p {
         font-weight: lighter;
     }
 
+    .cartContainer {
+        width: 90%;
+        min-height: 80%;
+        background-color: rgba(197, 229, 240, 1);
+        z-index: 20;
+        border-right: solid;
+        border-radius: 16px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 10%; 
+        left: 5%;
+    }
+
+    .openCart {
+        background-color: rgb(200, 120, 10);
+        color: white;
+        border-radius: 8px;
+        padding: 4px 8px;
+        cursor: pointer;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 8px;
+    }
+    .openCart:hover {
+        background-color: rgb(180, 105, 8);
+    }
 }

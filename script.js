@@ -166,12 +166,6 @@ function deliveryOption() {
     totalSum();
 }
 
-function allowDelivery() {
-    if (subTotal() > 14.99) {
-        return "activateDelivery()";
-    } 
-}
-
 function totalSum() {
     let deliverySum = document.getElementById('sumContainer');
     let delCosts = deliveryCosts();
@@ -185,14 +179,32 @@ function totalSum() {
 
 function orderNowBtnActive() {
     if (document.getElementById('pickupBtn').classList.contains('active') == true || document.getElementById('deliveryBtn').classList.contains('active') == true) {
-        document.getElementById('checkoutContainer').innerHTML = `<div id="orderNowBtn" class="orderNowBtn" onclick="generateConfirmation()">jetzt bestellen!</div>`; 
+        document.getElementById('checkoutContainer').innerHTML = `
+        <div id="orderNowBtn" class="orderNowBtn" onclick="generateConfirmation()">jetzt bestellen!</div>
+        <div id="closeCartBtn" class="closeCartBtn" onclick="closeCart()">mehr aussuchen</div>`; 
         document.getElementById('disclaimer').classList.add('displayNone');
         document.getElementById('orderNowBtn').classList.add('active');           
     } 
     if (document.getElementById('pickupBtn').classList.contains('active') == false && document.getElementById('deliveryBtn').classList.contains('active') == false) {
-        document.getElementById('checkoutContainer').innerHTML = `<div id="orderNowBtn" class="orderNowBtn">jetzt bestellen!</div>`;
+        document.getElementById('checkoutContainer').innerHTML = `
+        <div id="orderNowBtn" class="orderNowBtn">jetzt bestellen!</div>
+        <div id="closeCartBtn" class="closeCartBtn" onclick="closeCart()">mehr aussuchen</div>`;
         document.getElementById('disclaimer').classList.remove('displayNone');
         document.getElementById('orderNowBtn').classList.remove('active');
+    } 
+}
+
+function closeCart(){
+    document.getElementById('shoppingCartContainer').style.display = 'none';
+}
+
+function openCart(){
+    document.getElementById('shoppingCartContainer').style.display = 'flex';
+}
+
+function allowDelivery() {
+    if (subTotal() > 14.99) {
+        return "activateDelivery()";
     } 
 }
 
@@ -219,6 +231,7 @@ function activatePickup() {
 }
 
 function addMenu(name, price) {
+    document.getElementById('shoppingCartContainer').style.display = 'flex';
     let index = cartName.indexOf(name);
     if (index == -1) {
         cartName.push(name);

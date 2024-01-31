@@ -26,33 +26,13 @@
                 Mindestbestellwert: 15,- € | Lieferung: 4,- € | ab 30,- € keine Lieferkosten
             </div>    
         </div>        
-        <!-- <a href="tel:01234567890" class="callAction">
-            <img src="./img/anruf.png" alt="telSymbol">
-            0123 / 4567890
-        </a>     -->
     </section>
-    <!-- responsive -->
-    <div id="shoppingCartContainer" class="REScartContainer">
-        <div class="scHeader">
-            <h2>Warenkorb</h2>
-        </div>
-        <div id="shoppingCartContainerJS">
-            <!-- wird gerendert -->
-        </div>
-        <div id="deliveryOption" class="deliveryOptionContainer"></div>       
-                
-        <div id="checkoutContainer" class="checkoutContainer">
-            <div id="orderNowBtn" class="orderNowBtn" onclick="generateConfirmation()">jetzt bestellen!</div>
-        </div>
-    </div>
-
+    
     <section class="flex">
         <div id="menuList" class="menuList">
             <!-- wird gerendert -->
         </div>
-
-        
-    <!-- full screen -->    
+   
         <div id="shoppingCartContainer" class="cartContainer">
             <div class="scHeader">
                 <h2>Warenkorb</h2>
@@ -63,11 +43,13 @@
             <div id="deliveryOption" class="deliveryOptionContainer"></div>       
                     
             <div id="checkoutContainer" class="checkoutContainer">
-                <div id="orderNowBtn" class="orderNowBtn" onclick="generateConfirmation()">jetzt bestellen!</div>
+                <div id="orderNowBtn" class="orderNowBtn">jetzt bestellen!</div>
+                <div id="closeCartBtn" class="closeCartBtn" onclick="closeCart()">mehr aussuchen</div>
             </div>
         </div>
+        
     </section>    
-    
+    <div id="openCart" class="openCart" onclick="openCart()">zum Warenkorb</div>
     <div w3-include-html="templates/footer.html"></div>
 </div>    
 </body>
